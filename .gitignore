@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+sessions/*.json
+uploads/*
+data/*
+.streamlit/
