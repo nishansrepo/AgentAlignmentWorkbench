@@ -1,0 +1,42 @@
+Introduction to Machine Learning -- Fall 2026
+Homework 3: Probabilistic Models
+Due: November 11, 2026 at 11:59pm ET
+Total Points: 100
+
+Primary Grader: Co-TA Gamma
+Secondary Grader: Co-TA Alpha -- Theory
+
+Problem 1: Bayesian Inference (30 points)
+
+(a) [15 points] Medical test: sensitivity 0.95, specificity 0.98, prevalence 0.001. Patient tests positive. P(disease)?
+
+SOLUTION:
+P(D|T+) = P(T+|D)*P(D) / [P(T+|D)*P(D) + P(T+|notD)*P(notD)]
+= 0.95*0.001 / (0.95*0.001 + 0.02*0.999) = 0.00095/0.02093 = 0.0454 (4.5%).
+Base rate fallacy: disease so rare that false positives vastly outnumber true positives.
+Rubric: Terms 3pts, setup 4pts, computation 4pts, interpretation 4pts.
+
+(b) [15 points] Beta-Binomial conjugacy: derive posterior and MAP estimate.
+
+SOLUTION:
+Posterior: Beta(alpha + H, beta + N - H). MAP: (alpha+H-1)/(alpha+beta+N-2).
+As N grows, MAP converges to MLE (H/N).
+Rubric: Likelihood 3pts, conjugacy 3pts, posterior 4pts, MAP 3pts, asymptotics 2pts.
+
+Problem 2: EM and GMMs (35 points)
+
+(a) [15 points] EM for K-component GMM: E-step and M-step.
+SOLUTION: E: r_ik = pi_k*N(x_i|mu_k,Sigma_k) / sum. M: mu_k = sum(r_ik*x_i)/N_k, Sigma_k = sum(r_ik*(x_i-mu_k)(x_i-mu_k)^T)/N_k, pi_k = N_k/N.
+Rubric: Model 3pts, E-step 4pts, M-step 5pts, properties 3pts.
+
+(b) [10 points] K-means as special case of EM.
+SOLUTION: K-means = EM with isotropic equal covariances, sigma->0 (hard assignments), equal mixing.
+Rubric: Conditions 4pts, hard/soft 3pts, objective equivalence 3pts.
+
+(c) [10 points] Naive Bayes: what is "naive" and why does it work?
+SOLUTION: Conditional independence assumption. Works because: correct argmax despite wrong probabilities, fewer parameters avoids overfitting, effective in high-D sparse settings (text).
+Rubric: Formulation 3pts, assumption 3pts, reasons 4pts.
+
+Problem 3: Programming (35 points)
+Implement EM for GMMs. Visualize clusters. Plot log-likelihood. Test K=2,3,4,5 with BIC.
+SOLUTION: See hw3_solution.py.

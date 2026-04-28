@@ -1,0 +1,81 @@
+Introduction to Machine Learning -- Fall 2026
+Homework 1: Regression and Classification
+Due: September 30, 2026 at 11:59pm ET
+Total Points: 100
+
+Primary Grader: ML-TA-7 -- Conceptual questions
+Secondary Grader: Co-TA Beta -- Programming questions
+
+Problem 1: Linear Regression (25 points)
+
+(a) [10 points] Derive the closed-form OLS estimator starting from L(w) = ||Xw - y||^2.
+
+SOLUTION:
+L(w) = (Xw - y)^T (Xw - y) = w^T X^T X w - 2 w^T X^T y + y^T y
+grad_w L = 2 X^T X w - 2 X^T y = 0
+w* = (X^T X)^{-1} X^T y
+Solution exists when X^T X is invertible (no perfect collinearity).
+Rubric: Loss expansion 3pts, gradient 4pts, final form 3pts.
+
+(b) [8 points] Why is ridge regression preferred over OLS when D >> N?
+
+SOLUTION:
+When D > N, X^T X may be singular. Ridge adds lambda*I: w* = (X^T X + lambda I)^{-1} X^T y.
+Geometrically, L2 constrains solution to a hypersphere, shrinking coefficients toward zero.
+Rubric: Invertibility 3pts, equation 2pts, geometry 3pts.
+
+(c) [7 points] Model has R^2=0.95 train, R^2=0.52 test. Diagnose and propose two solutions.
+
+SOLUTION:
+Overfitting (high variance). Solutions: 1) Regularization (L1/L2). 2) Feature selection/PCA.
+Rubric: Diagnosis 3pts, solutions 2pts each.
+
+Problem 2: Logistic Regression (25 points)
+
+(a) [10 points] Derive the gradient of binary cross-entropy loss for logistic regression.
+
+SOLUTION:
+L(w) = -(1/N) sum [y_i log(sigma(w^T x_i)) + (1-y_i) log(1-sigma(w^T x_i))]
+Key: d/dz sigma(z) = sigma(z)(1-sigma(z))
+grad_w L = (1/N) sum (sigma(w^T x_i) - y_i) x_i
+Rubric: Loss 2pts, sigmoid derivative 2pts, chain rule 3pts, final form 3pts.
+
+(b) [8 points] Compare logistic vs linear regression: output space, loss function, decision boundary.
+
+SOLUTION:
+Output: continuous R vs probability [0,1]. Loss: MSE vs cross-entropy (convex for sigmoid).
+Boundary: both linear, but logistic is more robust via sigmoid saturation.
+Rubric: 2pts + 3pts + 3pts.
+
+(c) [7 points] Can logistic regression handle multi-class? Explain.
+
+SOLUTION:
+Yes. Softmax regression: P(y=k|x) = exp(w_k^T x) / sum exp(w_j^T x). Also OvR, OvO.
+Rubric: Correct 1pt, softmax 3pts, OvR/OvO 2pts, comparison 1pt.
+
+Problem 3: Support Vector Machines (25 points)
+
+(a) [10 points] Write hard-margin SVM, explain impracticality, write soft-margin.
+
+SOLUTION:
+Hard: min ||w||^2/2 s.t. y_i(w^T x_i + b) >= 1. Impractical: assumes linear separability.
+Soft: min ||w||^2/2 + C sum xi_i s.t. y_i(w^T x_i + b) >= 1 - xi_i, xi_i >= 0.
+Rubric: Hard 3pts, explanation 3pts, soft 3pts, C interpretation 1pt.
+
+(b) [8 points] Explain the kernel trick with an example.
+
+SOLUTION:
+Kernel K(x_i,x_j) computes dot product in high-D space without explicit mapping.
+RBF kernel: K = exp(-gamma ||x_i - x_j||^2), maps to infinite-D space.
+Rubric: Problem solved 2pts, mechanism 3pts, example 3pts.
+
+(c) [7 points] RBF SVM: 100% train, 60% test. Causes and hyperparameter adjustments?
+
+SOLUTION:
+Overfitting: gamma too large (tight boundary), C too large (no margin violations).
+Fix: decrease gamma, decrease C, cross-validate.
+Rubric: Diagnosis 2pts, gamma 2pts, C 2pts, CV 1pt.
+
+Problem 4: Programming (25 points)
+Implement logistic regression from scratch with NumPy.
+SOLUTION: See hw1_solution.py. Expected: ~96% train, ~95% test on breast cancer dataset.

@@ -1,0 +1,43 @@
+Introduction to Machine Learning -- Fall 2026
+Course Policies
+
+ACADEMIC INTEGRITY
+
+This course follows the university academic integrity policy.
+Permitted: discussing approaches with classmates, studying together, seeking TA help.
+Prohibited: sharing solutions/code, copying from any source, submitting AI-generated work as your own.
+First offense: zero on assignment + report. Second offense: failing grade.
+
+LATE SUBMISSION POLICY
+
+10% penalty per day late. Maximum 3 days. 3 grace days per semester (auto-applied).
+Grace days cannot apply to exams. Extensions require instructor approval with documentation.
+
+GRADING
+
+HW1: 15%, HW2: 15%, HW3: 15%, HW4: 15%, Midterm: 20%, Final: 20%.
+A: 90%+, B: 80-89%, C: 70-79%, D: 60-69%, F: below 60%.
+
+REGRADE REQUESTS
+
+Written request to grading TA within 7 days. Must specify problem, error, and justification.
+TA responds within 5 business days. Escalate to instructor if unresolved. Regrades may go up or down.
+
+OFFICE HOURS
+
+ML-TA-7: Tuesday 2-4pm, Thursday 10am-12pm
+Co-TA Alpha: Wednesday 3-5pm
+Co-TA Beta: Monday 4-6pm
+Co-TA Gamma: Thursday 2-4pm
+
+Course forum: Post questions publicly when possible. TAs respond within 24 hours on weekdays.
+
+EXAMS
+
+Midterm: 80 minutes, one handwritten cheat sheet.
+Final: 3 hours, two handwritten cheat sheets.
+No electronics. Notify instructor 48 hours in advance for make-ups.
+
+TEXTBOOK
+
+Required: Burkov, "The Hundred-Page Machine Learning Book"

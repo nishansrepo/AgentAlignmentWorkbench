@@ -1,0 +1,43 @@
+Introduction to Machine Learning -- Fall 2026
+Homework 2: Neural Networks and Optimization
+Due: October 21, 2026 at 11:59pm ET
+Total Points: 100
+
+Primary Grader: Co-TA Beta -- Programming
+Secondary Grader: ML-TA-7 -- Conceptual
+
+Problem 1: Backpropagation (30 points)
+
+(a) [15 points] Derive gradients for a two-layer ReLU network with MSE loss.
+
+SOLUTION:
+Forward: z1 = W1*x + b1, h = ReLU(z1), y_hat = W2*h + b2, L = ||y - y_hat||^2 / 2
+Backward: delta2 = y_hat - y. dL/dW2 = delta2*h^T, dL/db2 = delta2.
+delta1 = W2^T * delta2 * I(z1>0). dL/dW1 = delta1*x^T, dL/db1 = delta1.
+Rubric: Forward 2pts, output grads 4pts, ReLU propagation 4pts, input grads 4pts, notation 1pt.
+
+(b) [15 points] Vanishing gradient problem, ReLU advantage, dying ReLU.
+
+SOLUTION:
+Sigmoid max derivative = 0.25, multiplied across layers -> exponential decay. ReLU: derivative = 1 for z>0.
+Dying ReLU: if input permanently negative, gradient = 0, neuron stops learning.
+Mitigations: Leaky ReLU, PReLU, He initialization.
+Rubric: Mechanism 5pts, sigmoid analysis 3pts, ReLU advantage 3pts, dying ReLU 3pts, mitigations 1pt.
+
+Problem 2: Optimization (30 points)
+
+(a) [10 points] Compare batch GD, SGD, mini-batch SGD.
+SOLUTION: Batch: stable, slow. SGD: fast, noisy. Mini-batch: compromise, enables GPU parallelism.
+Rubric: Update rules 3pts, trade-offs 6pts, recommendation 1pt.
+
+(b) [10 points] Derive Adam optimizer.
+SOLUTION: m_t = beta1*m + (1-beta1)*g. v_t = beta2*v + (1-beta2)*g^2. Bias correct: m/(1-beta1^t), v/(1-beta2^t). Update: w -= lr * m_hat / (sqrt(v_hat) + eps).
+Rubric: Formulas 3pts, bias correction 2pts, update 2pts, explanation 3pts.
+
+(c) [10 points] L1 vs L2 regularization: why L1 produces sparsity.
+SOLUTION: L1 subgradient = lambda*sign(w), pushes small weights to exactly zero. L2 gradient = 2*lambda*w, proportional shrinkage. Geometrically: diamond (L1) vs circle (L2) constraint regions.
+Rubric: Definitions 2pts, sparsity mechanism 3pts, geometry 4pts, illustration 1pt.
+
+Problem 3: Programming (40 points)
+Implement MLP from scratch. Train on MNIST.
+SOLUTION: See hw2_solution.py. SGD ~92%, Adam ~96% after 20 epochs.
